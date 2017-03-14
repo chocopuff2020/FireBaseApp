@@ -82,18 +82,20 @@ function Game(options) {
                         $('#options2').append(`<div id='playerChoice'> ${player2Choice} </div>`)
                         if (player1Choice == player2Choice) {
                             console.log('It is a tie!');
+                            $('#result-container').html('It is a tie!')
                         } else if (player1Choice == 'rock' && player2Choice=='paper') {
                             console.log('player2 wins!');
+                            $('#result-container').html(`${name2} wins!`);
                         } else if (player1Choice == 'rock' && player2Choice=='scissors') {
-                            console.log('player1 wins!');
+                            $('#result-container').html(`${name1} wins!`);
                         } else if (player1Choice == 'paper' && player2Choice=='rock') {
-                            console.log('player1 wins!');
+                            $('#result-container').html(`${name1} wins!`);
                         } else if (player1Choice == 'paper' && player2Choice=='scissors') {
-                            console.log('player2 wins!');
+                            $('#result-container').html(`${name2} wins!`);
                         } else if (player1Choice == 'scissors' && player2Choice=='rock') {
-                            console.log('player2 wins!');
+                            $('#result-container').html(`${name2} wins!`);
                         } else if (player1Choice == 'scissors' && player2Choice=='paper') {
-                            console.log('player1 wins!');
+                            $('#result-container').html(`${name1} wins!`);
                         } else {
                             console.log('This is wierd...');
                         }
