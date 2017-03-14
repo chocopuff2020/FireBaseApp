@@ -4,10 +4,12 @@
 function Game(options) {
       var name1;
       var name2;
-      var wins;
+      var p1Wins = 0;
+      var p1Losses = 0;
+      var p2Wins= 0;
+      var p2Losses = 0;
       var player1Choice;
       var player2Choice = null;
-      var losses;
       var database = firebase.database();
       var db = firebase.database().ref('Players');
       var player1Ref = firebase.database().ref('/Players/player1/');
@@ -81,21 +83,43 @@ function Game(options) {
                         $('#options2').empty();
                         $('#options2').append(`<div id='playerChoice'> ${player2Choice} </div>`)
                         if (player1Choice == player2Choice) {
-                            console.log('It is a tie!');
                             $('#result-container').html('It is a tie!')
                         } else if (player1Choice == 'rock' && player2Choice=='paper') {
-                            console.log('player2 wins!');
                             $('#result-container').html(`${name2} wins!`);
+                            p2Wins++;
+                            p1Losses++;
+                            $('#p2Wins').html(` Wins: ${p2Wins}`);
+                            $('#p1Losses').html(` Losses: ${p1Losses}`);
                         } else if (player1Choice == 'rock' && player2Choice=='scissors') {
                             $('#result-container').html(`${name1} wins!`);
+                            p1Wins++;
+                            p2Losses++;
+                            $('#p1Wins').html(` Wins: ${p1Wins}`);
+                            $('#p2Losses').html(` Losses: ${p2Losses}`);
                         } else if (player1Choice == 'paper' && player2Choice=='rock') {
                             $('#result-container').html(`${name1} wins!`);
+                            p1Wins++;
+                            p2Losses++;
+                            $('#p1Wins').html(` Wins: ${p1Wins}`);
+                            $('#p2Losses').html(` Losses: ${p2Losses}`);
                         } else if (player1Choice == 'paper' && player2Choice=='scissors') {
                             $('#result-container').html(`${name2} wins!`);
+                            p2Wins++;
+                            p1Losses++;
+                            $('#p2Wins').html(` Wins: ${p2Wins}`);
+                            $('#p1Losses').html(` Losses: ${p1Losses}`);
                         } else if (player1Choice == 'scissors' && player2Choice=='rock') {
                             $('#result-container').html(`${name2} wins!`);
+                            p2Wins++;
+                            p1Losses++;
+                            $('#p2Wins').html(` Wins: ${p2Wins}`);
+                            $('#p1Losses').html(` Losses: ${p1Losses}`);
                         } else if (player1Choice == 'scissors' && player2Choice=='paper') {
                             $('#result-container').html(`${name1} wins!`);
+                            p1Wins++;
+                            p2Losses++;
+                            $('#p1Wins').html(` Wins: ${p1Wins}`);
+                            $('#p2Losses').html(` Losses: ${p2Losses}`);
                         } else {
                             console.log('This is wierd...');
                         }
@@ -104,13 +128,31 @@ function Game(options) {
                     console.log('Please choose an option');
                 }
             });
+      }
 
 
-    }
+     this.flush = function () {
+
+
+     }
+
 }
 
 
-
+$('#replayBtn').on('click', function() {
+    $('#options1').empty();
+    $('#options1').append(`
+                      <p class='choices1' value='rock'> Rock </p>
+                      <p class='choices1' value='paper'> Paper </p>
+                      <p class='choices1' value='scissors'> Scissors </p>
+                    `)
+    $('#options2').empty();
+    $('#options2').append(`
+                      <p class='choices2' value='rock'> Rock </p>
+                      <p class='choices2' value='paper'> Paper </p>
+                      <p class='choices2' value='scissors'> Scissors </p>
+                    `)
+})
 
 
 var game = new Game();

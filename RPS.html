@@ -70,7 +70,9 @@
                     <button type="button" class="btn btn-default" id="add-user-1">Submit</button>
                 </form>
           </div>
-          <div class="col-sm-4"></div>
+          <div class="col-sm-4"> 
+              <button type="button" class="btn btn-default" id="replayBtn">RePlay</button>
+          </div>
           <div class="col-sm-4" id="player-2-name">
                 <form action="/action_page.php">
                     <input class="form-control" type="text" id="name-input-2"  placeholder="Enter Player#2's name">
@@ -87,13 +89,20 @@
             <div class="col-sm-4 border" id="player-1-container">
                 <div> Choose one of the options </div>
                 <div id="options1"> </div>
-                <div> Result </div>
+                <div id="result1">
+                    <p id="p1Wins"> Wins: </p>
+                    <p id="p1Losses"> Losses: </p>
+                </div>
+
             </div>
             <div class="col-sm-4 border" id="result-container" > </div>
             <div class="col-sm-4 border" id="player-2-container">
                 <div> Choose one of the options </div>
                 <div id="options2"> </div>
-                <div> Result </div>
+                <div id="result2">
+                    <p id="p2Wins"> Wins: </p>
+                    <p id="p2Losses"> Losses: </p>
+                </div>
             </div>
          </div>
      </div>
