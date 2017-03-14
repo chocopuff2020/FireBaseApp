@@ -5,7 +5,8 @@ function Game(options) {
       var name1;
       var name2;
       var wins;
-      var choice;
+      var player1Choice;
+      var player2Choice = null;
       var losses;
       var database = firebase.database();
       var db = firebase.database().ref('Players');
@@ -17,7 +18,7 @@ function Game(options) {
                   player1Ref.on('value', gotData,errData);
 
                   function gotData(data) {
-                      console.log(data.val().name);
+                      // console.log(data.val().name);
                       name1 = $('#name-input-1').val().trim()
                       player1Ref.set({
                           name: name1
@@ -32,9 +33,9 @@ function Game(options) {
                   }
 
                   $('#options1').append(`
-                      <p class='choices'> Rock </p>
-                      <p class='choices'> Paper </p>
-                      <p class='choices'> Scissor </p>
+                      <p class='choices1' value='rock'> Rock </p>
+                      <p class='choices1' value='paper'> Paper </p>
+                      <p class='choices1' value='scissors'> Scissors </p>
                     `)
 
             });
@@ -43,7 +44,7 @@ function Game(options) {
                   player2Ref.on('value', gotData,errData);
 
                   function gotData(data) {
-                      console.log(data.val().name);
+                      // console.log(data.val().name);
                       name2 = $('#name-input-2').val().trim()
                       player2Ref.set({
                           name: name2
@@ -58,12 +59,52 @@ function Game(options) {
                   }
 
                   $('#options2').append(`
-                      <p class='choices'> Rock </p>
-                      <p class='choices'> Paper </p>
-                      <p class='choices'> Scissor </p>
+                      <p class='choices2' value='rock'> Rock </p>
+                      <p class='choices2' value='paper'> Paper </p>
+                      <p class='choices2' value='scissors'> Scissors </p>
                     `)
             });
+
       }
+
+
+      this.play = function() {
+            $(document).on("click", ".choices1", function() {
+                player1Choice = $(this).attr('value');
+                console.log(player1Choice);
+                $('#options1').empty();
+                $('#options1').append(`<div id='playerChoice'> ${player1Choice} </div>`);
+                if (player2Choice == null) {
+                    $(document).on("click", ".choices2", function() {
+                        player2Choice = $(this).attr('value');
+                        console.log(player2Choice);
+                        $('#options2').empty();
+                        $('#options2').append(`<div id='playerChoice'> ${player2Choice} </div>`)
+                        if (player1Choice == player2Choice) {
+                            console.log('It is a tie!');
+                        } else if (player1Choice == 'rock' && player2Choice=='paper') {
+                            console.log('player2 wins!');
+                        } else if (player1Choice == 'rock' && player2Choice=='scissors') {
+                            console.log('player1 wins!');
+                        } else if (player1Choice == 'paper' && player2Choice=='rock') {
+                            console.log('player1 wins!');
+                        } else if (player1Choice == 'paper' && player2Choice=='scissors') {
+                            console.log('player2 wins!');
+                        } else if (player1Choice == 'scissors' && player2Choice=='rock') {
+                            console.log('player2 wins!');
+                        } else if (player1Choice == 'scissors' && player2Choice=='paper') {
+                            console.log('player1 wins!');
+                        } else {
+                            console.log('This is wierd...');
+                        }
+                    });
+                } else {
+                    console.log('Please choose an option');
+                }
+            });
+
+
+    }
 }
 
 
@@ -72,3 +113,5 @@ function Game(options) {
 
 var game = new Game();
 game.init();
+game.play();
+// game.play();
