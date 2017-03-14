@@ -1,35 +1,74 @@
-var config = {
-    apiKey: "AIzaSyAiO07l49uW-V2dh09XmWcEjRQI-56EdnU",
-    authDomain: "messaging-app-d71af.firebaseapp.com",
-    databaseURL: "https://messaging-app-d71af.firebaseio.com",
-    storageBucket: "messaging-app-d71af.appspot.com",
-    messagingSenderId: "953399621923"
-  };
-  firebase.initializeApp(config);
-
-var database = firebase.database();
-var dbRefObject1 = firebase.database().ref().child('Players');
-
-dbRefObject1.on('value', snap => console.log(snap.val()));
 
 
 
+function Game(options) {
+      var name1;
+      var name2;
+      var wins;
+      var choice;
+      var losses;
+      var database = firebase.database();
+      var db = firebase.database().ref('Players');
+      var player1Ref = firebase.database().ref('/Players/player1/');
+      var player2Ref = firebase.database().ref('/Players/player2/');
 
-  $("#add-user").on("click", function() {
-      event.preventDefault();
-      var name = $('#name-input').val().trim();
-      database.ref('/Players/player1/').set({
-                      name : name
-      });
-  });
+      this.init = function() {
+            $('#add-user-1').on('click',function() {
+                  player1Ref.on('value', gotData,errData);
 
-  // database.ref().on("value", function(snapshot) {
-  //         console.log(snapshot.val());
-  //         $('#name-1-display').html(snapshot.val().name);
-  // }, function(errorObject) {
-  //     console.log('The read failed: ' + errorObject.code);
-  // });
-  // 
-  
-  dbRefObject1.on('value', snap => $('#name-1-display').html(snap.val().player1.name))
-;
+                  function gotData(data) {
+                      console.log(data.val().name);
+                      name1 = $('#name-input-1').val().trim()
+                      player1Ref.set({
+                          name: name1
+                      })
+                      $('#player-1-name').html(name1);
+                      $('#name-input-1').val('');
+                  };
+                  function errData(err) {
+                      console.log('Data for user1 do not load');
+                      console.log(err);
+
+                  }
+
+                  $('#options1').append(`
+                      <p class='choices'> Rock </p>
+                      <p class='choices'> Paper </p>
+                      <p class='choices'> Scissor </p>
+                    `)
+
+            });
+
+            $('#add-user-2').on('click',function() {
+                  player2Ref.on('value', gotData,errData);
+
+                  function gotData(data) {
+                      console.log(data.val().name);
+                      name2 = $('#name-input-2').val().trim()
+                      player2Ref.set({
+                          name: name2
+                      })
+                      $('#player-2-name').html(name2);
+                      $('#name-input-2').val('');
+                  };
+                  function errData(err) {
+                      console.log('Data for user2 do not load');
+                      console.log(err);
+
+                  }
+
+                  $('#options2').append(`
+                      <p class='choices'> Rock </p>
+                      <p class='choices'> Paper </p>
+                      <p class='choices'> Scissor </p>
+                    `)
+            });
+      }
+}
+
+
+
+
+
+var game = new Game();
+game.init();

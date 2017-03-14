@@ -19,7 +19,11 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
   <style type="text/css">
-      .col-sm-4 {
+      h1 {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      .border {
           border: 1px solid black;
       }
       #submit-btn {
@@ -28,36 +32,57 @@
       #player-container {
          margin-top: 20px;
       }
+      #player-1-name {
+         font-size:50px;
+      }
+      #player-2-name {
+         font-size:50px;
+      }
+      .choices {
+        background-color: lightgreen;
+      }
+      .choices:hover {
+        border: 2px solid green;
+      }
+
   </style>
 </head>
 <body>
-    <div class="container">
         <h1> Rock Paper Scissor </h1>
 
         <!-- NAME INPUT -->
+    <div class="container" id="input-container">
         <div class="row">
-           <div class="col-sm-6">
+           <div class="col-sm-4" id="player-1-name">
                 <form action="/action_page.php">
-                    <input class="form-control" type="text" id="name-input">
-                    <button type="button" class="btn btn-default" id="add-user">Submit</button>
+                    <input class="form-control" type="text" id="name-input-1" placeholder="Enter Player#1's name">
+                    <button type="button" class="btn btn-default" id="add-user-1">Submit</button>
+                </form>
+          </div>
+          <div class="col-sm-4"></div>
+          <div class="col-sm-4" id="player-2-name">
+                <form action="/action_page.php">
+                    <input class="form-control" type="text" id="name-input-2"  placeholder="Enter Player#2's name">
+                    <button type="button" class="btn btn-default" id="add-user-2">Submit</button>
                 </form>
             </div>
         </div>
+
     </div>
 
      <!-- GAME PLAY -->
      <div class="container" id="player-container">
          <div class="row">
-            <div class="col-sm-4" id="player-1-container">
-                <p id="name-1-display"> Player#1's Name </p>
-                <div id="options"> </div>
-                <p> Result </p>
+            <div class="col-sm-4 border" id="player-1-container">
+                <div> Choose one of the options </div>
+                <div id="options1"> </div>
+                <div> Result </div>
             </div>
-            <div class="col-sm-4" id="result-container" > Result Board</div>
-            <div class="col-sm-4" id="player-2-container">
-                <p> Player#2's Name </p>
-                <div id="options"> </div>
-                <p> Result </p>
+            <div class="col-sm-4 border" id="result-container" > Result Board</div>
+            <div class="col-sm-4 border" id="player-2-container">
+                <div> Choose one of the options </div>
+                <div id="options2"> </div>
+                <div> Result </div>
             </div>
          </div>
      </div>
@@ -71,6 +96,17 @@
   
 
   <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyCxb9h_vPXWsbSg9Y2emKovPXy5LW2Mvw8",
+      authDomain: "rock-paper-scissor-fa51b.firebaseapp.com",
+      databaseURL: "https://rock-paper-scissor-fa51b.firebaseio.com",
+      storageBucket: "rock-paper-scissor-fa51b.appspot.com",
+      messagingSenderId: "246892526064"
+    };
+    firebase.initializeApp(config);
+  </script>
   <script type="text/javascript" src='./assets/RPS.js'></script>
 </body>
 </html>
