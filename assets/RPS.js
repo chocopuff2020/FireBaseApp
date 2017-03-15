@@ -21,12 +21,14 @@ function Game(options) {
 
                   function gotData(data) {
                       // console.log(data.val().name);
-                      name1 = $('#name-input-1').val().trim()
+                      name1 = $('#name-input-1').val();
                       player1Ref.set({
-                          name: name1
+                          name: name1,
+                          wins: p1Wins,
+                          losses:p1Losses
                       })
                       $('#player-1-name').html(name1);
-                      $('#name-input-1').val('');
+                      // $('#name-input-1').val('');
                   };
                   function errData(err) {
                       console.log('Data for user1 do not load');
@@ -47,12 +49,14 @@ function Game(options) {
 
                   function gotData(data) {
                       // console.log(data.val().name);
-                      name2 = $('#name-input-2').val().trim()
+                      name2 = $('#name-input-2').val();
                       player2Ref.set({
-                          name: name2
+                          name: name2,
+                          wins: p2Wins,
+                          losses:p2Losses
                       })
                       $('#player-2-name').html(name2);
-                      $('#name-input-2').val('');
+                      // $('#name-input-2').val('');
                   };
                   function errData(err) {
                       console.log('Data for user2 do not load');
@@ -91,11 +95,17 @@ function Game(options) {
                             $('#p2Wins').html(` Wins: ${p2Wins}`);
                             $('#p1Losses').html(` Losses: ${p1Losses}`);
                         } else if (player1Choice == 'rock' && player2Choice=='scissors') {
-                            $('#result-container').html(`${name1} wins!`);
                             p1Wins++;
                             p2Losses++;
+                            // player1Ref.on('value', function() {
+                            //       player1Ref.update({
+                            //           wins: p1Wins,
+                            //       })
+                            // });
+                            $('#result-container').html(`${name1} wins!`);
                             $('#p1Wins').html(` Wins: ${p1Wins}`);
                             $('#p2Losses').html(` Losses: ${p2Losses}`);
+
                         } else if (player1Choice == 'paper' && player2Choice=='rock') {
                             $('#result-container').html(`${name1} wins!`);
                             p1Wins++;
@@ -127,6 +137,8 @@ function Game(options) {
                 } else {
                     console.log('Please choose an option');
                 }
+
+
             });
       }
 
@@ -140,6 +152,7 @@ function Game(options) {
 
 
 $('#replayBtn').on('click', function() {
+    
     $('#options1').empty();
     $('#options1').append(`
                       <p class='choices1' value='rock'> Rock </p>
