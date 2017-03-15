@@ -4,6 +4,7 @@
 function Game(options) {
       var name1;
       var name2;
+      // var choice = "";
       var p1Wins = 0;
       var p1Losses = 0;
       var p2Wins= 0;
@@ -25,7 +26,7 @@ function Game(options) {
                       player1Ref.set({
                           name: name1,
                           wins: p1Wins,
-                          losses:p1Losses
+                          losses:p1Losses,
                       })
                       $('#player-1-name').html(name1);
                       // $('#name-input-1').val('');
@@ -80,12 +81,14 @@ function Game(options) {
                 console.log(player1Choice);
                 $('#options1').empty();
                 $('#options1').append(`<div id='playerChoice'> ${player1Choice} </div>`);
+                addChoice1();
                 if (player2Choice == null) {
                     $(document).on("click", ".choices2", function() {
                         player2Choice = $(this).attr('value');
                         console.log(player2Choice);
                         $('#options2').empty();
                         $('#options2').append(`<div id='playerChoice'> ${player2Choice} </div>`)
+                        addChoice2();
                         if (player1Choice == player2Choice) {
                             $('#result-container').html('It is a tie!')
                         } else if (player1Choice == 'rock' && player2Choice=='paper') {
@@ -111,6 +114,24 @@ function Game(options) {
 
             });
       }
+
+
+      function addChoice1() {
+          player1Ref.on('value', function() {
+                  player1Ref.update({
+                      choices: player1Choice,
+                  });
+                });
+      }
+
+      function addChoice2() {
+          player2Ref.on('value', function() {
+                  player2Ref.update({
+                      choices: player2Choice,
+                  });
+                });
+      }
+
 
       function player1Wins() {
             var player1 = $('#player-1-name').text();
