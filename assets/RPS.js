@@ -89,47 +89,17 @@ function Game(options) {
                         if (player1Choice == player2Choice) {
                             $('#result-container').html('It is a tie!')
                         } else if (player1Choice == 'rock' && player2Choice=='paper') {
-                            $('#result-container').html(`${name2} wins!`);
-                            p2Wins++;
-                            p1Losses++;
-                            $('#p2Wins').html(` Wins: ${p2Wins}`);
-                            $('#p1Losses').html(` Losses: ${p1Losses}`);
+                            player2Wins();
                         } else if (player1Choice == 'rock' && player2Choice=='scissors') {
-                            p1Wins++;
-                            p2Losses++;
-                            // player1Ref.on('value', function() {
-                            //       player1Ref.update({
-                            //           wins: p1Wins,
-                            //       })
-                            // });
-                            $('#result-container').html(`${name1} wins!`);
-                            $('#p1Wins').html(` Wins: ${p1Wins}`);
-                            $('#p2Losses').html(` Losses: ${p2Losses}`);
-
+                            player1Wins();
                         } else if (player1Choice == 'paper' && player2Choice=='rock') {
-                            $('#result-container').html(`${name1} wins!`);
-                            p1Wins++;
-                            p2Losses++;
-                            $('#p1Wins').html(` Wins: ${p1Wins}`);
-                            $('#p2Losses').html(` Losses: ${p2Losses}`);
+                            player1Wins();
                         } else if (player1Choice == 'paper' && player2Choice=='scissors') {
-                            $('#result-container').html(`${name2} wins!`);
-                            p2Wins++;
-                            p1Losses++;
-                            $('#p2Wins').html(` Wins: ${p2Wins}`);
-                            $('#p1Losses').html(` Losses: ${p1Losses}`);
+                            player2Wins();
                         } else if (player1Choice == 'scissors' && player2Choice=='rock') {
-                            $('#result-container').html(`${name2} wins!`);
-                            p2Wins++;
-                            p1Losses++;
-                            $('#p2Wins').html(` Wins: ${p2Wins}`);
-                            $('#p1Losses').html(` Losses: ${p1Losses}`);
+                            player2Wins();
                         } else if (player1Choice == 'scissors' && player2Choice=='paper') {
-                            $('#result-container').html(`${name1} wins!`);
-                            p1Wins++;
-                            p2Losses++;
-                            $('#p1Wins').html(` Wins: ${p1Wins}`);
-                            $('#p2Losses').html(` Losses: ${p2Losses}`);
+                            player1Wins();
                         } else {
                             console.log('This is wierd...');
                         }
@@ -142,7 +112,43 @@ function Game(options) {
             });
       }
 
+      function player1Wins() {
+            var player1 = $('#player-1-name').text();
+            p1Wins++;
+            p2Losses++;
+            player1Ref.on('value', function() {
+                  player1Ref.update({
+                      wins: p1Wins,
+                  });
+            });
+            player2Ref.on('value', function() {
+                  player2Ref.update({
+                      losses: p2Losses,
+                  });
+            });
+            $('#result-container').html(`${player1} wins!`);
+            $('#p1Wins').html(` Wins: ${p1Wins}`);
+            $('#p2Losses').html(` Losses: ${p2Losses}`);
+      }
 
+      function player2Wins() {
+            var player2 = $('#player-2-name').text();
+            p2Wins++;
+            p1Losses++;
+            player2Ref.on('value', function() {
+                  player2Ref.update({
+                      wins: p2Wins,
+                  });
+            });
+            player1Ref.on('value', function() {
+                  player1Ref.update({
+                      losses: p1Losses,
+                  });
+            });
+            $('#result-container').html(`${player2} wins!`);
+            $('#p2Wins').html(` Wins: ${p2Wins}`);
+            $('#p1Losses').html(` Losses: ${p1Losses}`);
+      }
      this.flush = function () {
 
 
@@ -152,7 +158,7 @@ function Game(options) {
 
 
 $('#replayBtn').on('click', function() {
-    
+
     $('#options1').empty();
     $('#options1').append(`
                       <p class='choices1' value='rock'> Rock </p>
@@ -164,7 +170,8 @@ $('#replayBtn').on('click', function() {
                       <p class='choices2' value='rock'> Rock </p>
                       <p class='choices2' value='paper'> Paper </p>
                       <p class='choices2' value='scissors'> Scissors </p>
-                    `)
+                    `);
+    $('#result-container').empty();
 })
 
 
