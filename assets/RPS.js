@@ -17,7 +17,7 @@ function Game(options) {
          dataRef.ref('/players/player1').on('value', function(snap) {
                   console.log(snap.val().name);
                   $('#player-1-name').html(snap.val().name);
-              })
+              });
 
          $('#add-user-2').on('click', function() {
               name2 = $('#name-input-2').val().trim();
