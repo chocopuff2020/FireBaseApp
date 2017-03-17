@@ -56,6 +56,19 @@
       #result-container {
         font-size: 30px;
       }
+      #message-container{
+        height: 250px;
+        width: 45%;
+        margin: 0 auto;
+        margin-top: 40px;
+        border: 1px solid black;
+      }
+      #message-input-container {
+        width: 45%;
+        margin: 0 auto;
+        margin-top: 20px;
+        border: 1px solid black;
+      }
   </style>
 </head>
 <body>
@@ -71,7 +84,7 @@
                 </form>
           </div>
           <div class="col-sm-4"> 
-              <button type="button" class="btn btn-default" id="replayBtn">RePlay</button>
+              <button type="button" class="btn btn-default" id="replatn">RePlay</button>
           </div>
           <div class="col-sm-4" id="player-2-name">
                 <form action="/action_page.php">
@@ -107,9 +120,15 @@
          </div>
      </div>
 
-     <div class="container" id="message-container">
-       <div class="row">
-           
+     <div class="container">
+       <div class="row"  id="message-container">
+            <div class="col-sm-4">fgdfgdfgfdgdgdfg</div>
+      </div>
+       <div class="row" id="message-input-container">
+            <form action="/action_page.php">
+                <input class="form-control" type="text" id="message-input" placeholder="Enter your message here">
+                <button type="button" style="margin-left:45%; margin-top: 10px;" class="btn btn-default" id="add-message">Send</button>
+            </form>
        </div>
 
      </div>
